@@ -11,9 +11,9 @@ Rebol [
 	home: https://github.com/Oldes/Rebol-RDAP
 	usage: [
 		;- version 1:
-		result: read rdap://rebol.tech
+		result: read rdap:google.com
 		;- version 2:
-		result: write rdap:// "seznam.cz"
+		result: write rdap:// 109.81.82.250
 	]
 	note: "Rebol versions lower than 3.18.5 have a TLS bug that may cause requests to fail!"
 ]
