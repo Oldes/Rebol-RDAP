@@ -1,5 +1,5 @@
 Rebol [
-	title: "RDAP Protocol"
+	title: "RDAP Scheme"
 	SPDX-License-Identifier: MIT
 	name:  rdap
 	type:  module	
