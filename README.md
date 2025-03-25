@@ -28,3 +28,6 @@ By default, the scheme prints basic output to the console. This can be disabled 
 ```rebol
 system/options/log/rdap: 0
 ```
+
+![image](https://github.com/user-attachments/assets/daed13ea-d6d1-411d-be38-98f7238d1efb)
+
