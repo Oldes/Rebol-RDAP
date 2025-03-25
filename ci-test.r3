@@ -26,9 +26,9 @@ print LF
 print-horizontal-line
 print as-yellow {Resolve info about an IP:}
 ;; first get our current IP
-ip: my-ip?
+external-ip: read http://ifconfig.me/ip
 ;; now use it in a query
-result: write rdap:// ip
+result: write rdap:// :external-ip
 print-horizontal-line
 print result
 
