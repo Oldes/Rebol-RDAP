@@ -5,7 +5,7 @@ Rebol [
 	type:  module	
 	purpose: {Registration Data Access Protocol}
 	author: "Oldes"
-	version: 0.0.1
+	version: 0.0.2
 	file: %rdap.reb
 	date: 25-Mar-2025
 	home: https://github.com/Oldes/Rebol-RDAP
@@ -15,6 +15,7 @@ Rebol [
 		;- version 2:
 		result: write rdap:// "seznam.cz"
 	]
+	note: "Rebol versions lower than 3.18.5 have a TLS bug that may cause requests to fail!"
 ]
 
 
@@ -198,7 +199,7 @@ sys/make-scheme [
 		;-- Write handler performs RDAP query based on target domain or IP
 		write: function [
 			port   [port!] "RDAP port"
-			target [string! tuple!] "Domain or IP"
+			target [any-string! tuple!] "Domain or IP"
 		][
 			;; Turn off HTTP traces...
 			http-verbosity: system/options/log/http
@@ -207,11 +208,11 @@ sys/make-scheme [
 			clear rdap-que
 			clear result ;; Function returns map with JSON result of all related urls
 
-			try [target: to tuple! target]
+			try [target: to tuple! target: as string! target]
 
 			sys/log/info 'RDAP ["Query:^[[22m" target]
 
-			either string? target [
+			either any-string? target [
 				;- Step 1: Extract TLD from domain and query IANA RDAP server       
 				try/with [
 					all [
@@ -254,7 +255,10 @@ sys/make-scheme [
 		read: function [
 			port [port!]
 		][
-			port/actor/write port port/spec/host
+			port/actor/write port any [
+				select port/spec 'host    ;; rdap://google.com
+				select port/spec 'target  ;; rdap:google.com
+			]
 		]
 	]
 ]

@@ -12,10 +12,15 @@ Registration Data Access Protocol ([RDAP](https://about.rdap.org/)) scheme for [
 import rdap
 
 ;; Collect all available info about a domain
-data: read rdap://google.com
+data: read rdap:google.com
 
 ;; Collect info about an IP
-data: write rdap:// my-ip?
+data: read rdap:109.81.82.250
+
+;; Or using `write` instead
+foreach value ["google.com" "github.com" 109.81.82.250][
+	write rdap:// value
+]
 ```
 
 By default, the scheme prints basic output to the console. This can be disabled by adjusting the RDAP verbosity level in the log options.

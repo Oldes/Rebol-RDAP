@@ -18,17 +18,14 @@ import 'rdap
 ;- GraphQL API tests...
 print-horizontal-line
 print as-yellow {Resolve info about a domain:}
-result: read rdap://root.cz
+result: read rdap:google.com
 print-horizontal-line
 print result
 
 print LF
 print-horizontal-line
 print as-yellow {Resolve info about an IP:}
-;; first get our current IP
-external-ip: read http://ifconfig.me/ip
-;; now use it in a query
-result: write rdap:// :external-ip
+result: write rdap:// 109.81.82.250 ;;same like: read rdap:109.81.82.250
 print-horizontal-line
 print result
 
