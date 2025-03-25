@@ -42,7 +42,7 @@ read-rdap: function/with [url [url!] /quiet ][
 		]
 		put result url data
 	]
-	unless map? data [exit]
+	unless map? data [return none]
 	collect-links data/links
 	if block? data/entities [
 		foreach ent data/entities [
